@@ -1,0 +1,17 @@
+encodedUserPW = encodebase64("admin:truThful@0Navy");
+
+headrDIct = dict("string");
+
+put(headrDIct ,"Authorization","Basic "+ encodedUserPW ) ; 
+
+getFileURL = "https://cpq-20165.bigmachines.com/bmfsweb/cpq-20165/image/WebServices/getConfigDetail.xml" ; 
+
+soapString =  urldatabyget(getFileURL  , "", "error"); 
+
+getRowsURL = "https://cpq-20165.bigmachines.com/v2_0/receiver/dataTables/39196112"; 
+
+result = urldatabypost(getRowsURL, soapString  , "Not Awailable", headrDIct , true) ; 
+
+print result ; 
+
+return "" ;
