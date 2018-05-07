@@ -1,0 +1,36 @@
+response = dict("string");
+// GENERATE MERGE REST CALL
+url = siteUrl+"/rest/v2/docxMerge";
+jsonObj = json();
+jsonput(jsonObj, "processVarName", processVarName);
+jsonput(jsonObj, "transactionId", transactionId);
+jsonput(jsonObj, "sourceFileAttachId", sourceFileId);
+jsonput(jsonObj, "targetFileAttachId", targetFileId);
+jsonput(jsonObj, "approvedChanges", jsonarray(compareJsonString));
+headers = dict("string");
+put(headers, "Authorization", userAuth );
+put(headers, "Accept", "application/json");
+put(headers, "Content-Type", "application/json");
+// call rest method
+xlsxResponse = urldata( url, "POST", headers, jsontostr(jsonObj) );
+if( get(xlsxResponse, "Status-Code") <> "200" ){
+er = get(xlsxResponse, "Error-Message");
+if(len(er) <= 5){
+er = get(xlsxResponse, "Message-Body");
+}
+put(response, "error", er );
+return response;
+}else{
+mb = get(xlsxResponse, "Message-Body");
+jmb = json(mb);
+errors = jsonget(jmb , "errors" );
+if(len(errors) > 5){
+put(response, "errArray", errors);
+print("MERGE COMPLETE WITH ERRORS");
+return response;
+}
+document = jsonget(jmb , "base64Doc" );
+put(response, "base64doc", document);
+print("MERGE COMPLETE");
+return response;
+}
