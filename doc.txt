@@ -1,0 +1,368 @@
+result="";
+
+hwc=false;  swc=false; svc=false;
+hwc1=false;  swc1=false; svc1=false;
+hwc2=false;  swc2=false; svc2=false;
+hwc3=false;  swc3=false; svc3=false;
+hwc4=false;  swc4=false; svc4=false;
+hwc5=false;  swc5=false; svc5=false;
+hwc6=false;  swc6=false; svc6=false;
+g1=false;  g2=false; g3=false; g4=false; g5=false; g6=false;
+as25104=false; as89095=false; as86009=false; as85025=false;
+draft=false;
+
+cpuDict=dict("string");
+hdDict=dict("string");
+swDict=dict("string");
+pdDict=dict("string");
+supportDict=dict("string");
+ifDict=dict("boolean");
+ifpDict=dict("float");
+cdDict=dict("boolean");
+cdpDict=dict("float");
+mdDict=dict("boolean");
+mdpDict=dict("float");
+posDict=dict("boolean");
+pospDict=dict("float");
+vaDict=dict("boolean");
+vapDict=dict("float");
+ficDict=dict("boolean");
+ficpDict=dict("float");
+ostDict=dict("boolean");
+ostpDict=dict("float");
+wtDict=dict("boolean");
+wtpDict=dict("float");
+modelArr=string[];
+
+for line in transactionLine {
+	if(line._part_number==""){
+		put(ifDict, line._document_number, false);
+		put(cdDict, line._document_number, false);
+		put(mdDict, line._document_number, false);
+		put(posDict, line._document_number, false);
+		put(vaDict, line._document_number, false);
+		put(ficDict, line._document_number, false);
+		put(ostDict, line._document_number, false);
+		put(wtDict, line._document_number, false);
+	}
+}
+
+for line in transactionLine  {
+
+	if(line._part_number==""){
+		append(modelArr, line._document_number);
+	}
+	
+	if(line._part_number=="WR11519"){
+		put(supportDict, line._parent_doc_number, "Vision Gold");
+	}elif(line._part_number=="WR11517"){
+		put(supportDict, line._parent_doc_number, "Vision Platinum");
+	}elif(line._part_number=="WR11518"){
+		put(supportDict, line._parent_doc_number, "Vision Titanium");
+	}
+	
+	
+	if(line._part_number=="WR11507"){
+		put(ifDict, line._parent_doc_number, true);
+		put(ifpDict, line._parent_doc_number, line.netPrice_l);
+	}elif(line._part_number=="WR11505"){
+		put(cdDict, line._parent_doc_number, true);
+		put(cdpDict, line._parent_doc_number, line.netPrice_l);
+	}elif(line._part_number=="WR11508"){
+		put(mdDict, line._parent_doc_number, true);
+		put(mdpDict, line._parent_doc_number, line.netPrice_l);
+	}elif(line._part_number=="WR11510"){
+		put(posDict, line._parent_doc_number, true);
+		put(pospDict, line._parent_doc_number, line.netPrice_l);
+	}elif(line._part_number=="WR11511"){
+		put(vaDict, line._parent_doc_number, true);
+		put(vapDict, line._parent_doc_number, line.netPrice_l);
+	}elif(line._part_number=="WR11506"){
+		put(ficDict, line._parent_doc_number, true);
+		put(ficpDict, line._parent_doc_number, line.netPrice_l);
+	}elif(line._part_number=="WR11509"){
+		put(ostDict, line._parent_doc_number, true);
+		put(ostpDict, line._parent_doc_number, line.netPrice_l);
+	}elif(line._part_number=="WR11512"){
+		put(wtDict, line._parent_doc_number, true);
+		put(wtpDict, line._parent_doc_number, line.netPrice_l);
+	}
+
+	if(line._part_number=="CM50000"){
+		put(cpuDict, line._parent_doc_number, "Dual Core 2.8GHz");
+	}elif(line._part_number=="CM50001"){
+		put(cpuDict, line._parent_doc_number, "Dual Core 3.2GHz");
+	}elif(line._part_number=="CM50002"){
+		put(cpuDict, line._parent_doc_number, "Dual Core 3.5GHz");
+	}elif(line._part_number=="CM50003"){
+		put(cpuDict, line._parent_doc_number, "Dual Core 3.8GHz");
+	}elif(line._part_number=="CM50004"){
+		put(cpuDict, line._parent_doc_number, "Quad Core 2.8GHz");
+	}elif(line._part_number=="CM50005"){
+		put(cpuDict, line._parent_doc_number, "Quad Core 3.2GHz");
+	}elif(line._part_number=="CM50006"){
+		put(cpuDict, line._parent_doc_number, "Quad Core 3.5GHz");
+	}elif(line._part_number=="CM50007"){
+		put(cpuDict, line._parent_doc_number, "Quad Core 3.8GHz");
+	}elif(line._part_number=="CM50008"){
+		put(cpuDict, line._parent_doc_number, "Vision E3-1220 4 Cores 3.1 GHz");
+	}elif(line._part_number=="CM50009"){
+		put(cpuDict, line._parent_doc_number, "Vision E3-1290 4 Cores 3.6 GHz");
+	}elif(line._part_number=="CM50010"){
+		put(cpuDict, line._parent_doc_number, "Vision E3-2440 6 Cores 2.4 Ghz");
+	}elif(line._part_number=="CM50011"){
+		put(cpuDict, line._parent_doc_number, "Vision E3-2450 8 Cores 2.1 Ghz");
+	}elif(line._part_number=="CM50012"){
+		put(cpuDict, line._parent_doc_number, "Vision E3-2470 8 Cores 2.3 Ghz");
+	}elif(line._part_number=="CM50013"){
+		put(cpuDict, line._parent_doc_number, "Vision E3-4640 8 Cores 2.4 Ghz");
+	}elif(line._part_number=="CM50014"){
+		put(cpuDict, line._parent_doc_number, "Vision E3-4650 8 Cores 2.7 Ghz");
+	}elif(line._part_number=="CM50015"){
+		put(cpuDict, line._parent_doc_number, "Vision E3-4870 10-core 2.4 GHz");
+	}elif(line._part_number=="CM50016"){
+		put(cpuDict, line._parent_doc_number, "Vision E3-8860 10-core 2.13 GHz");
+	}
+	
+	if(line._part_number=="AS25115"){
+		put(hdDict, line._parent_doc_number, "120GB SSD");
+	}elif(line._part_number=="AS25120"){
+		put(hdDict, line._parent_doc_number, "240GB SSD");
+	}elif(line._part_number=="AS25125"){
+		put(hdDict, line._parent_doc_number, "500GB SSD");
+	}elif(line._part_number=="AS25130"){
+		put(hdDict, line._parent_doc_number, "250GB HDD5400");
+	}elif(line._part_number=="AS25135"){
+		put(hdDict, line._parent_doc_number, "500GB HDD5400");
+	}elif(line._part_number=="AS25140"){
+		put(hdDict, line._parent_doc_number, "1TB HDD5400");
+	}elif(line._part_number=="AS25145"){
+		put(hdDict, line._parent_doc_number, "256GB HDD7200");
+	}elif(line._part_number=="AS25150"){
+		put(hdDict, line._parent_doc_number, "500GB HDD7200");
+	}elif(line._part_number=="AS25155"){
+		put(hdDict, line._parent_doc_number, "1TB HDD7200");
+	}elif(line._part_number=="AS25160"){
+		put(hdDict, line._parent_doc_number, "146 GB 15k Hard Drive");
+	}elif(line._part_number=="AS25165"){
+		put(hdDict, line._parent_doc_number, "450 GB 15k Hard Drive");
+	}elif(line._part_number=="AS25170"){
+		put(hdDict, line._parent_doc_number, "500 GB 10k Hard Drive");
+	}elif(line._part_number=="AS25175"){
+		put(hdDict, line._parent_doc_number, "1 TB 10k Hard Drive");
+	}elif(line._part_number=="AS25180"){
+		put(hdDict, line._parent_doc_number, "2 TB 7200 Hard Drive");
+	}elif(line._part_number=="AS25185"){
+		put(hdDict, line._parent_doc_number, "4 TB 7200 Hard Drive");
+	}else{
+		put(hdDict, line._parent_doc_number, "No Hard Drive Selected");
+	}
+	
+	if(line._part_number=="AS00102"){
+		put(swDict, line._parent_doc_number, "Oracle Linux");
+	}elif(line._part_number=="AS00103"){
+		put(swDict, line._parent_doc_number, "Blue Hat Enterprise Linux 6 Server Premium");
+	}elif(line._part_number=="AS00104"){
+		put(swDict, line._parent_doc_number, "Blue Hat Enterprise Linux 6 Server Standard");
+	}elif(line._part_number=="AS00105"){
+		put(swDict, line._parent_doc_number, "Blue Hat Enterprise Linux 6 Server Self-Support");
+	}elif(line._part_number=="AS00106"){
+		put(swDict, line._parent_doc_number, "Alliance 7 Pro");
+	}elif(line._part_number=="AS00107"){
+		put(swDict, line._parent_doc_number, "Alliance 7 Ultimate");
+	}elif(line._part_number=="AS00108"){
+		put(swDict, line._parent_doc_number, "Alliance 8 Pro");
+	}elif(line._part_number=="AS00109"){
+		put(swDict, line._parent_doc_number, "Linux");
+	}
+	
+	if(line._part_number=="AS35001" OR line._part_number=="AS35019"){
+		put(pdDict, line._parent_doc_number, "Ultra Z15 Laptop");
+	}elif(line._part_number=="AS35003" OR line._part_number=="AS35021"){
+		put(pdDict, line._parent_doc_number, "Ultra Z17 Laptop");
+	}elif(line._part_number=="AS35005" OR line._part_number=="AS35023"){
+		put(pdDict, line._parent_doc_number, "Ultra ZX15 Laptop");
+	}elif(line._part_number=="AS35007" OR line._part_number=="AS35025"){
+		put(pdDict, line._parent_doc_number, "Elite 15 Laptop");
+	}elif(line._part_number=="AS35009" OR line._part_number=="AS35027"){
+		put(pdDict, line._parent_doc_number, "Elite 15M Laptop");
+	}elif(line._part_number=="AS35011" OR line._part_number=="AS35029"){
+		put(pdDict, line._parent_doc_number, "Elite 17M Laptop");
+	}elif(line._part_number=="AS95001" OR line._part_number=="AS95004"){
+		put(pdDict, line._parent_doc_number, "Sentinel UM-4500 Laptop");
+	}elif(line._part_number=="AS95002" OR line._part_number=="AS95005"){
+		put(pdDict, line._parent_doc_number, "Sentinel UMx-9500 Laptop");
+	}elif(line._part_number=="AS95003" OR line._part_number=="AS95006"){
+		put(pdDict, line._parent_doc_number, "Sentinel UMz-9990 Laptop");
+	}elif(line._part_number=="AS85025"){
+		put(pdDict, line._parent_doc_number, "Green Server 3500");
+	}elif(line._part_number=="AS85026"){
+		put(pdDict, line._parent_doc_number, "Green Server 7500");
+	}elif(line._part_number=="AS85027"){
+		put(pdDict, line._parent_doc_number, "Green Server 9560");
+	}elif(line._part_number=="AS86008"){
+		put(pdDict, line._parent_doc_number, "Ultra Power Server 1500");
+	}elif(line._part_number=="AS86010"){
+		put(pdDict, line._parent_doc_number, "Ultra Power Server 3000");
+	}elif(line._part_number=="AS86011"){
+		put(pdDict, line._parent_doc_number, "Ultra Power Server 4500");
+	}elif(line._part_number=="AS89095"){
+		put(pdDict, line._parent_doc_number, "Sentinel Power Server 4500");
+	}elif(line._part_number=="AS89100"){
+		put(pdDict, line._parent_doc_number, "Sentinel Power Server 5500");
+	}elif(line._part_number=="AS89105"){
+		put(pdDict, line._parent_doc_number, "Sentinel Power Server 7500");
+	}
+		
+	if(line._part_custom_field1=="Hardware"){
+		hwc=true;
+	}elif(line._part_custom_field1=="Software"){
+		swc=true;
+	}elif(line._part_custom_field1=="Service"){
+		svc=true;
+	}
+	
+	if(line._part_number=="AS25104"){
+		as25104=true;
+	}elif(line._part_number=="AS89095"){
+		as89095=true;
+	}elif(line._part_number=="AS86008"){
+		as86009=true;
+	}elif(line._part_number=="AS85025"){
+		as85025=true;
+	}
+	
+	if(line.group_l=="1"){
+		g1=true;
+		if(line._part_custom_field1=="Hardware"){
+			hwc1=true;
+		}elif(line._part_custom_field1=="Software"){
+			swc1=true;
+		}elif(line._part_custom_field1=="Service"){
+			svc1=true;
+		}
+	}elif(line.group_l=="2"){
+		g2=true;
+		if(line._part_custom_field1=="Hardware"){
+			hwc2=true;
+		}elif(line._part_custom_field1=="Software"){
+			swc2=true;
+		}elif(line._part_custom_field1=="Service"){
+			svc2=true;
+		}
+	}elif(line.group_l=="3"){
+		g3=true;
+		if(line._part_custom_field1=="Hardware"){
+			hwc3=true;
+		}elif(line._part_custom_field1=="Software"){
+			swc3=true;
+		}elif(line._part_custom_field1=="Service"){
+			svc3=true;
+		}
+	}elif(line.group_l=="4"){
+		g4=true;
+		if(line._part_custom_field1=="Hardware"){
+			hwc4=true;
+		}elif(line._part_custom_field1=="Software"){
+			swc4=true;
+		}elif(line._part_custom_field1=="Service"){
+			svc4=true;
+		}
+	}elif(line.group_l=="5"){
+		g5=true;
+		if(line._part_custom_field1=="Hardware"){
+			hwc5=true;
+		}elif(line._part_custom_field1=="Software"){
+			swc5=true;
+		}elif(line._part_custom_field1=="Service"){
+			svc5=true;
+		}
+	}elif(line.group_l=="6"){
+		g6=true;
+		if(line._part_custom_field1=="Hardware"){
+			hwc6=true;
+		}elif(line._part_custom_field1=="Software"){
+			swc6=true;
+		}elif(line._part_custom_field1=="Service"){
+			svc6=true;
+		}
+	}		
+}
+
+for each in modelArr{
+	ifip=0;	cdp=0;	mdp=0;	posp=0;	vap=0;	ficp=0;	ostp=0;	wtp=0;
+	cpu=get(cpuDict, each);
+	hd=get(hdDict, each);
+	sw=get(swDict, each);
+	pd=get(pdDict, each);
+	support=get(supportDict, each);
+	ifi=get(ifDict, each);
+	if(ifi==true){
+		ifip=get(ifpDict, each);
+	}
+	cd=get(cdDict, each);
+	if(cd==true){
+		cdp=get(cdpDict, each);
+	}
+	md=get(mdDict, each);
+	if(md==true){
+		mdp=get(mdpDict, each);
+	}
+	pos=get(posDict, each);
+	if(pos==true){
+		posp=get(pospDict, each);
+	}
+	va=get(vaDict, each);
+	if(va==true){
+		vap=get(vapDict, each);
+	}
+	fic=get(ficDict, each);
+	if(fic==true){
+		ficp=get(ficpDict, each);
+	}
+	ost=get(ostDict, each);
+	if(ost==true){
+		ostp=get(ostpDict, each);
+	}
+	wt=get(wtDict, each);
+	if(wt==true){
+		wtp=get(wtpDict, each);
+	}
+	
+	result = result;
+}
+
+if(status_t=="Pricing Approved" OR status_t=="Contract Finalized" OR status_t=="Pending Contract Finalization" OR status_t=="Order Created" OR status_t=="Contract Revision Pending"){
+	draft=true;
+}
+
+//enable all commented out below when we have sort by category and both for proposal 
+result=result+"1~hardwareCheck_t~"+string(hwc)+"|"
+			 +"1~softwareCheck_t~"+string(swc)+"|"
+		 +"1~serviceCheck_t~"+string(svc)+"|";
+result = result	 +"1~group1Check_t~"+string(g1)+"|"
+			 +"1~group2Check_t~"+string(g2)+"|"
+			 +"1~group3Check_t~"+string(g3)+"|"
+			 +"1~group4Check_t~"+string(g4)+"|"
+			 +"1~group5Check_t~"+string(g5)+"|"
+			 +"1~group6Check_t~"+string(g6)+"|"
+			 +"1~hardware1Check_t~"+string(hwc1)+"|"
+			 +"1~software1Check_t~"+string(swc1)+"|"
+			 +"1~service1Check_t~"+string(svc1)+"|"
+			 +"1~hardware2Check_t~"+string(hwc2)+"|"
+			 +"1~software2Check_t~"+string(swc2)+"|"
+			 +"1~service2Check_t~"+string(svc2)+"|"
+			 +"1~hardware3Check_t~"+string(hwc3)+"|"
+			 +"1~software3Check_t~"+string(swc3)+"|"
+			 +"1~service3Check_t~"+string(svc3)+"|"
+			 +"1~hardware4Check_t~"+string(hwc4)+"|"
+			 +"1~software4Check_t~"+string(swc4)+"|"
+			 +"1~service4Check_t~"+string(svc4)+"|"
+			 +"1~hardware5Check_t~"+string(hwc5)+"|"
+			 +"1~software5Check_t~"+string(swc5)+"|"
+			 +"1~service5Check_t~"+string(svc5)+"|"
+			 +"1~hardware6Check_t~"+string(hwc6)+"|"
+			 +"1~software6Check_t~"+string(swc6)+"|"
+			 +"1~service6Check_t~"+string(svc6)+"|";
+
+return result;
